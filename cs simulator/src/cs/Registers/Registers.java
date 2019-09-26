@@ -4,20 +4,24 @@ public class Registers {
     int numOfGPR = 4;
     int numOfXR = 3;
 
-    int GPR[];   // GPR: general purpose registers
-    int XR[];    // XR: Index Registers
-    int PC;
-    int CC;
-    int MAR;
-    int MBR;
-    int MFR;
-    int MSR;
-    int IR;
+    String GPR[];   // GPR: general purpose registers
+    String XR[];    // XR: Index Registers
+    String PC;
+    String CC;
+    String MAR;
+    String MBR;
+    String MFR;
+    String MSR;
+    String IR;
 
     // max values
-    static int sixteenBitMax = Integer.parseInt("FFFF", 16);
-    static int twelveBitMax = Integer.parseInt("FFF", 16);
-    static int fourBitMax = Integer.parseInt("F", 16);
+    static int LengthLimit16Bit = 16;
+    static int LengthLimit12Bit = 12;
+    static int LengthLimit4Bit = 4;
+
+    static String sixteenBit = "0000000000000000";
+    static String twelveBit = "000000000000";
+    static String fourBit = "0000";
 
     // flags to indicate the need for a GUI update
     public boolean[] GPRUpdateRequired;
@@ -31,34 +35,34 @@ public class Registers {
     public boolean MSRUpdateRequired;
     public boolean MFRUpdateRequired;
 
-    public int Valid = 0;
-    public int InvalidRegNum = 1;
-    public int Overflow = 2;
+    public String Valid = "Valid Register Number and Value";
+    public String InvalidRegNum = "Invalid Register Number";
+    public String Overflow = "The Value causes Overflow";
 
     // Registers Constructor
     public Registers() {
-        GPR = new int[numOfGPR];
-        XR = new int[numOfXR];
+        GPR = new String[numOfGPR];
+        XR = new String[numOfXR];
         GPRUpdateRequired = new boolean[numOfGPR];
         XRUpdateRequired = new boolean[numOfXR];
 
-        /* initialize the values in all the registers to zero
-        initialize all flags to false
+        /* initialize the values in all the registers to 0
+         * initialize all flags to false
          */
         for (int i = 0; i < GPR.length; i++) {
-            GPR[i] = 0;
+            GPR[i] = sixteenBit;
             GPRUpdateRequired[i] = false;
         }
         for (int i = 0; i < XR.length; i++) {
-            XR[i] = 0;
+            XR[i] = sixteenBit;
             XRUpdateRequired[i] = false;
         }
-        int PC = 0;
-        int CC = 0;
-        int MAR = 0;
-        int MBR = 0;
-        int MFR = 0;
-        int IR = 0;
+        String PC = twelveBit;
+        String CC = fourBit;
+        String MAR = sixteenBit;
+        String MBR = sixteenBit;
+        String MFR = fourBit;
+        String IR = sixteenBit;
 
         PCUpdateRequired = false;
         CCUpdateRequired = false;
@@ -71,8 +75,8 @@ public class Registers {
     }
 
     // return the value in GPR if the register number is valid, otherwise return InvalidRegNum
-    public int getGPR(int rNum) {
-        if (rNum >= 0 && rNum < GPR.length) {
+    public String getGPR(int rNum) {
+        if (rNum >= 0 && rNum < numOfGPR) {
             return GPR[rNum];
         } else {
             return InvalidRegNum;
@@ -82,10 +86,9 @@ public class Registers {
     /* Sets the GPR with the value provided if register number and value are valid;
      * Otherwise return status and print a message on the console
      */
-    public int setGPR(int rNum, int value) {
-        int status = Valid;
-        int max = sixteenBitMax;
-        if (rNum >= 0 && rNum < GPR.length && value <= max) {
+    public String setGPR(int rNum, String value) {
+        String status = Valid;
+        if (rNum >= 0 && rNum < GPR.length && value.length() <= sixteenBit.length()) {
             // base case, store value in the register specified
             GPR[rNum] = value;
             GPRUpdateRequired[rNum] = true;
@@ -93,9 +96,7 @@ public class Registers {
             // if register number is invalid, set status to InvalidRegNum
             status = InvalidRegNum;
         } else {
-            // if value > max, set status to Overflow and store value in specified register
-            GPR[rNum] = value & sixteenBitMax;
-            GPRUpdateRequired[rNum] = true;
+            // if value > max, set status to Overflow
             status = Overflow;
         }
 
@@ -104,7 +105,7 @@ public class Registers {
 
 
     // return the value in XR if the register number is valid, otherwise return InvalidRegNum
-    public int getXR(int rNum) {
+    public String getXR(int rNum) {
         rNum = rNum - 1;
         if (rNum < 0 || rNum > XR.length) {
             return InvalidRegNum;
@@ -116,11 +117,10 @@ public class Registers {
     /* Sets the XR with the value provided if register number and value are valid;
      * Otherwise return status and print a message on the console
      */
-    public int setXR(int rNum, int value) {
-        int status = Valid;
-        int max = twelveBitMax;
+    public String setXR(int rNum, String value) {
+        String status = Valid;
         rNum = rNum - 1;
-        if ((rNum < XR.length) && (value <= max)) {
+        if ((rNum < XR.length) && (value.length() <= sixteenBit.length())) {
             // base case, store value in the register specified
             XR[rNum] = value;
             XRUpdateRequired[rNum] = true;
@@ -128,10 +128,7 @@ public class Registers {
             // if register number is invalid, set status to InvalidRegNum
             status = InvalidRegNum;
         } else {
-            // if value > max, set status to Overflow and store value in specified register
-            value = value & sixteenBitMax;
-            XR[rNum] = value;
-            XRUpdateRequired[rNum] = true;
+            // if value > max, set status to Overflow
             status = Overflow;
         }
 
@@ -139,15 +136,14 @@ public class Registers {
     }
 
     // PC getter, returns value of PC
-    public int getPC() {
+    public String getPC() {
         return PC;
     }
 
     // PC setter, see GPR documentation
-    public int setPC(int value) {
-        int status = Valid;
-        int max = twelveBitMax;
-        if (value <= max) {
+    public String setPC(String value) {
+        String status = Valid;
+        if (value.length() <= twelveBit.length()) {
             PC = value;
             PCUpdateRequired = true;
         } else {
@@ -157,15 +153,14 @@ public class Registers {
     }
 
     // CC getter, returns value of CC
-    public int getCC() {
+    public String getCC() {
         return CC;
     }
 
     // CC setter, see GPR documentation
-    public int setCC(int value) {
-        int status = Valid;
-        int max = fourBitMax;
-        if (value <= max) {
+    public String setCC(String value) {
+        String status = Valid;
+        if (value.length() <= fourBit.length()) {
             CC = value;
             CCUpdateRequired = true;
         } else {
@@ -175,15 +170,14 @@ public class Registers {
     }
 
     // IR getter, returns value of IR
-    public int getIR() {
+    public String getIR() {
         return IR;
     }
 
     // IR setter, see GPR documentation
-    public int setIR(int value) {
-        int status = Valid;
-        int max = sixteenBitMax;
-        if (value <= max) {
+    public String setIR(String value) {
+        String status = Valid;
+        if (value.length() <= sixteenBit.length()) {
             IR = value;
             IRUpdateRequired = true;
         } else {
@@ -193,15 +187,14 @@ public class Registers {
     }
 
     // MAR getter, returns value of MAR
-    public int getMAR() {
+    public String getMAR() {
         return MAR;
     }
 
     // MAR setter, see GPR documentation
-    public int setMAR(int value) {
-        int status = Valid;
-        int max = sixteenBitMax;
-        if (value <= max) {
+    public String setMAR(String value) {
+        String status = Valid;
+        if (value.length() <= sixteenBit.length()) {
             MAR = value;
             MARUpdateRequired = true;
         } else {
@@ -211,15 +204,14 @@ public class Registers {
     }
 
     // MBR getter, returns value of MBR
-    public int getMBR() {
+    public String getMBR() {
         return MBR;
     }
 
     // MBR setter, see GPR documentation
-    public int setMBR(int value) {
-        int status = Valid;
-        int max = sixteenBitMax;
-        if (value <= max) {
+    public String setMBR(String value) {
+        String status = Valid;
+        if (value.length() <= sixteenBit.length()) {
             MBR = value;
             MBRUpdateRequired = true;
         } else {
@@ -229,15 +221,14 @@ public class Registers {
     }
 
     // MSR getter, returns value of MSR
-    public int getMSR() {
+    public String getMSR() {
         return MSR;
     }
 
     // MSR setter, see GPR documentation
-    public int setMSR(int value) {
-        int status = Valid;
-        int max = sixteenBitMax;
-        if (value <= max) {
+    public String setMSR(String value) {
+        String status = Valid;
+        if (value.length() <= sixteenBit.length()) {
             MSR = value;
             MSRUpdateRequired = true;
         } else {
@@ -247,15 +238,14 @@ public class Registers {
     }
 
     // MFR getter, returns value of MFR
-    public int getMFR() {
+    public String getMFR() {
         return MFR;
     }
 
     // MFR setter, see GPR documentation
-    public int setMFR(int value) {
-        int status = Valid;
-        int max = fourBitMax;
-        if (value <= max) {
+    public String setMFR(String value) {
+        String status = Valid;
+        if (value.length() <= fourBit.length()) {
             MFR = value;
             MFRUpdateRequired = true;
         } else {
