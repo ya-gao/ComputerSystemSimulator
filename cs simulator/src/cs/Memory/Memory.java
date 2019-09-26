@@ -1,10 +1,10 @@
-package cs.Memory;
+package Memory;
 
 import java.util.Vector;
 
 public class Memory {
-    public static final int MEMORY_MAX_LENGTH= 2048;
-    public static final int MaxValue = 65536;
+    public static final int MEMORY_MAX_LENGTH= 2048; //Max size is 2048 words
+    public static final int MaxValue = 65536; //Max value is 2^16
     static Vector<String> memory = new Vector<String>();
     static Vector<String> memory1 = new Vector<String>();
 
@@ -13,15 +13,18 @@ public class Memory {
 
     }
 
-    public int getMemoryCapacity(){
+    public int getMemoryCapacity(){// get current memory capacity that has been used
         return memory.capacity();
     }
 
-    public String getMemValue(String address) throws Exception{
+    public String getMemValue(String address) throws Exception{//get memory value by address
         int addr= Integer.parseInt(address);
         String result = "";
         if(addr>MEMORY_MAX_LENGTH-1 &&addr<MEMORY_MAX_LENGTH*2){
             result= memory1.get(addr);
+        }
+        else if(addr>getMemoryCapacity()){
+            throw new Exception("Memory not defined");
         }
         else if(addr<MEMORY_MAX_LENGTH){
             result = memory.get(addr);
@@ -32,7 +35,8 @@ public class Memory {
         return result;
     }
 
-    public void setMemValue(String address, String Value) throws Exception{
+    public void setMemValue(String address, String Value) throws Exception{// set memory value with address and data
+
         int value= Integer.parseInt(Value,2);
         int addr= Integer.parseInt(address);
         if (addr> MEMORY_MAX_LENGTH-1){
