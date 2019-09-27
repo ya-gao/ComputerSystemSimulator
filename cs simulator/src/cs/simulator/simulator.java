@@ -9,6 +9,10 @@ package cs.simulator;
  *
  * @author dilipvarma
  */
+
+import Registers.*;
+import Memory.*;
+
 public class simulator extends javax.swing.JFrame {
 
     /**
@@ -391,18 +395,40 @@ public class simulator extends javax.swing.JFrame {
 
 	        String str = opcode + reg + ireg + mem + q;
 	        System.out.println(str);
+
+	        // LDR Instruction
+
                 if(mem1!=0)
                 {
                     if(ireg1!=00)
                     {
-                        // fetch the data stored at IX register which will be an address
-                        // add the data fetched with the address given in instruction
-                        // load the resultant data into register
+                        // indirect addressing/indexing
+                        // Calculating Effective Address
+                        // Add M[mem] and IX1 to get EA in integer format
+                        int intEA = Integer.parseInt(M.getMemValue(R.getIX(ireg1)), 2) +
+                                    Integer.parseInt(M.getMemValue(mem), 2);
+                        // Convert integer EA into Binary String with leading zeros
+                        String EA = String.format("%016d", Integer.toBinaryString(intEA));
+                        // Set MAR with EA
+                        R.setMAR(EA);
+                        // Fetch M[MAR] into MBR
+                        R.serMBR(M.getMemValue(R.getMAR()));
+                        // Move the content of MBR into designated GPR
+                        R.setGPR(reg, R.getMBR());
                     }
                 }
                 else
                 {
-                    // fetch the data stored at the address(ending part)
+                    // NO indirect addressing, fetch the data stored at the address(ending part)
+                    // Move content of M[mem] into MAR
+                    /*
+                     * Object R and M should be created when clicking the IPL button
+                     */
+                    R.setMAR(mem);
+                    // Fetch M[MAR] into MBR
+                    R.serMBR(M.getMemValue(R.getMAR()));
+                    // Move the content of MBR into designated GPR
+                    R.setGPR(reg, R.getMBR());
                 }
     }//GEN-LAST:event_loadActionPerformed
 
