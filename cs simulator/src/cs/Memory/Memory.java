@@ -17,7 +17,7 @@ public class Memory {
     public Memory(){
         //
         //Memory.initializeMemory();
-
+        Memory.initializeMemory2();
     }
 
     public int getMemoryCapacity(){// get current memory capacity that has been used
@@ -84,7 +84,7 @@ public class Memory {
         }
     }
 
-    public void initializeMemory2(){
+    public static void initializeMemory2(){
         for(int i=0;i<MEMORY_MAX_LENGTH;i++){
             memory.add("0");
         }
