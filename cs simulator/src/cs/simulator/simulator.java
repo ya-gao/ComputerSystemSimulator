@@ -395,7 +395,8 @@ public class simulator extends javax.swing.JFrame {
 
 	        String str = opcode + reg + ireg + mem + q;
 	        System.out.println(str);
-
+        Registers R = new Registers();
+        Memory M = new Memory();
 	        // LDR Instruction
 
                 if(mem1!=0)
@@ -412,9 +413,9 @@ public class simulator extends javax.swing.JFrame {
                         // Set MAR with EA
                         R.setMAR(EA);
                         // Fetch M[MAR] into MBR
-                        R.serMBR(M.getMemValue(R.getMAR()));
+                        R.setMBR(M.getMemValue(R.getMAR()));
                         // Move the content of MBR into designated GPR
-                        R.setGPR(reg, R.getMBR());
+                        R.setGPR(reg1, R.getMBR());
                     }
                 }
                 else
@@ -428,7 +429,7 @@ public class simulator extends javax.swing.JFrame {
                     // Fetch M[MAR] into MBR
                     R.serMBR(M.getMemValue(R.getMAR()));
                     // Move the content of MBR into designated GPR
-                    R.setGPR(reg, R.getMBR());
+                    R.setGPR(reg1, R.getMBR());
                 }
     }//GEN-LAST:event_loadActionPerformed
 
@@ -467,7 +468,7 @@ public class simulator extends javax.swing.JFrame {
         jLabel13.setEnabled(true);
         jLabel15.setEnabled(true);
         
-        
+
         
     }//GEN-LAST:event_iplActionPerformed
 
