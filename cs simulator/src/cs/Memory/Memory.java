@@ -4,21 +4,24 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class Memory {
     public static final int MEMORY_MAX_LENGTH= 2048; //Max size is 2048 words
     public static final int MaxValue = 65536; //Max value is 2^16
-    static Vector<String> memory = new Vector<String>();
-    static Vector<String> memory1 = new Vector<String>();
+    static ArrayList<String> memory = new ArrayList<>(2048);
+    static ArrayList<String> memory1 = new ArrayList<>(2048);
 
 
     public Memory(){
+        //
+        //Memory.initializeMemory();
 
     }
 
     public int getMemoryCapacity(){// get current memory capacity that has been used
-        return memory.capacity();
+        return memory.size();
     }
 
     public String getMemValue(String address) throws Exception{//get memory value by address
@@ -53,11 +56,11 @@ public class Memory {
             throw new Exception("attempt to overwrite reserved memory");
         }
         else {
-            memory.set(addr,Value);
+            memory.add(addr,Value);
         }
     }
 
-    public void initializeMemory(){
+    public static void initializeMemory(){
         File file = new File("memory.txt");
         BufferedReader reader = null;
         try {
@@ -80,5 +83,12 @@ public class Memory {
             }
         }
     }
+
+    public void initializeMemory2(){
+        for(int i=0;i<MEMORY_MAX_LENGTH;i++){
+            memory.add("0");
+        }
+    }
+
 
 }

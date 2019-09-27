@@ -51,7 +51,7 @@ public class simulator extends javax.swing.JFrame {
         jLabel12.setEnabled(false);
         jLabel13.setEnabled(false);
         jLabel15.setEnabled(false);
-        
+
         
     }
 
@@ -472,9 +472,19 @@ public class simulator extends javax.swing.JFrame {
         jLabel12.setEnabled(true);
         jLabel13.setEnabled(true);
         jLabel15.setEnabled(true);
-        
+        Memory m=new Memory();
+        try {
+            m.setMemValue("10","0010");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            System.out.println(m.getMemValue("1000"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        
+
     }//GEN-LAST:event_iplActionPerformed
 
     private void storeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeActionPerformed
