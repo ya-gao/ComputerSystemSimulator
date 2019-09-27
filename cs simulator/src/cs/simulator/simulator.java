@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cs.simulator;
+package simulator;
 
 /**
  *
@@ -309,7 +309,7 @@ public class simulator extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_irActionPerformed
 
-    private void loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadActionPerformed
+    private void loadActionPerformed(java.awt.event.ActionEvent evt) throws Exception{//GEN-FIRST:event_loadActionPerformed
                     // TODO add your handling code here:
                     
                     String instruction= input.getText();
@@ -395,7 +395,9 @@ public class simulator extends javax.swing.JFrame {
 
 	        String str = opcode + reg + ireg + mem + q;
 	        System.out.println(str);
-
+        Registers R = new Registers();
+        Memory M = new Memory();
+        M.initializeMemory();
 	        // LDR Instruction
 
                 if(mem1!=0)
@@ -405,16 +407,16 @@ public class simulator extends javax.swing.JFrame {
                         // indirect addressing/indexing
                         // Calculating Effective Address
                         // Add M[mem] and IX1 to get EA in integer format
-                        int intEA = Integer.parseInt(M.getMemValue(R.getIX(ireg1)), 2) +
+                        int intEA = Integer.parseInt(M.getMemValue(R.getXR(ireg1)), 2) +
                                     Integer.parseInt(M.getMemValue(mem), 2);
                         // Convert integer EA into Binary String with leading zeros
                         String EA = String.format("%016d", Integer.toBinaryString(intEA));
                         // Set MAR with EA
                         R.setMAR(EA);
                         // Fetch M[MAR] into MBR
-                        R.serMBR(M.getMemValue(R.getMAR()));
+                        R.setMBR(M.getMemValue(R.getMAR()));
                         // Move the content of MBR into designated GPR
-                        R.setGPR(reg, R.getMBR());
+                        R.setGPR(reg1, R.getMBR());
                     }
                 }
                 else
@@ -426,9 +428,9 @@ public class simulator extends javax.swing.JFrame {
                      */
                     R.setMAR(mem);
                     // Fetch M[MAR] into MBR
-                    R.serMBR(M.getMemValue(R.getMAR()));
+                    R.setMBR(M.getMemValue(R.getMAR()));
                     // Move the content of MBR into designated GPR
-                    R.setGPR(reg, R.getMBR());
+                    R.setGPR(reg1, R.getMBR());
                 }
     }//GEN-LAST:event_loadActionPerformed
 
@@ -467,7 +469,7 @@ public class simulator extends javax.swing.JFrame {
         jLabel13.setEnabled(true);
         jLabel15.setEnabled(true);
         
-        
+
         
     }//GEN-LAST:event_iplActionPerformed
 
