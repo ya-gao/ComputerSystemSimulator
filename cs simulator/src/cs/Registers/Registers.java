@@ -1,7 +1,17 @@
 package Registers;
 
+/*
+ *
+ * @author Ya
+ */
 
+/*
+ * The registers are implemented in Registers class. The indexing of GPR and IX are decimal numbers,
+ * and the content of all the registers are in the format of Binary String.
+ * Functions set<RegisterName> and get<RegisterName> are implemented for each type of register.
+ */
 public class Registers {
+
     int numOfGPR = 4;
     int numOfXR = 3;
 
@@ -15,7 +25,7 @@ public class Registers {
     String MSR;
     String IR;
 
-    // max values
+    // Length of different types of registers
     static int LengthLimit16Bit = 16;
     static int LengthLimit12Bit = 12;
     static int LengthLimit4Bit = 4;
@@ -24,7 +34,7 @@ public class Registers {
     static String twelveBit = "000000000000";
     static String fourBit = "0000";
 
-    // flags to indicate the need for a GUI update
+    // flags to indicate the need for a GUI update, not using these at this point
     public boolean[] GPRUpdateRequired;
     public boolean[] XRUpdateRequired;
     public boolean[] FRUpdateRequired;
@@ -36,6 +46,7 @@ public class Registers {
     public boolean MSRUpdateRequired;
     public boolean MFRUpdateRequired;
 
+    // Status of input instruction
     public String Valid = "Valid Register Number and Value";
     public String InvalidRegNum = "Invalid Register Number";
     public String Overflow = "The Value Causes Overflow";
@@ -73,7 +84,7 @@ public class Registers {
         MSRUpdateRequired = false;
         MFRUpdateRequired = false;
 
-        // give some random value to all the registers
+        // give some random values to the registers
         GPR[0] = "0101101001010011";
         GPR[1] = "1010010110010110";
         GPR[2] = "01010100101010101";
@@ -85,7 +96,7 @@ public class Registers {
         CC = "0110";
     }
 
-    // return the value in GPR if the register number is valid, otherwise return InvalidRegNum
+    // Return the value in GPR if the register number is valid, otherwise return InvalidRegNum
     public String getGPR(int rNum) {
         if (rNum >= 0 && rNum < numOfGPR) {
             return GPR[rNum];
@@ -99,7 +110,7 @@ public class Registers {
      */
     public String setGPR(int rNum, String value) {
         String status = Valid;
-        if (rNum >= 0 && rNum < GPR.length && value.length() <= sixteenBit.length()) {
+        if (rNum >= 0 && rNum < GPR.length && value.length() <= LengthLimit16Bit) {
             // base case, store value in the register specified
             GPR[rNum] = value;
             GPRUpdateRequired[rNum] = true;
@@ -131,7 +142,7 @@ public class Registers {
     public String setXR(int rNum, String value) {
         String status = Valid;
         rNum = rNum - 1;
-        if ((rNum < XR.length) && (value.length() <= sixteenBit.length())) {
+        if ((rNum < XR.length) && (value.length() <= LengthLimit16Bit)) {
             // base case, store value in the register specified
             XR[rNum] = value;
             XRUpdateRequired[rNum] = true;
@@ -146,15 +157,15 @@ public class Registers {
         return status;
     }
 
-    // PC getter, returns value of PC
+    // Returns value of PC
     public String getPC() {
         return PC;
     }
 
-    // PC setter, see GPR documentation
+    // Sets the PC with the value provided; Indicates an overflow if overflow occurs
     public String setPC(String value) {
         String status = Valid;
-        if (value.length() <= twelveBit.length()) {
+        if (value.length() <= LengthLimit12Bit) {
             PC = value;
             PCUpdateRequired = true;
         } else {
@@ -163,15 +174,15 @@ public class Registers {
         return status;
     }
 
-    // CC getter, returns value of CC
+    // Returns value of CC
     public String getCC() {
         return CC;
     }
 
-    // CC setter, see GPR documentation
+    // Sets the CC with the value provided; Indicates an overflow if overflow occurs
     public String setCC(String value) {
         String status = Valid;
-        if (value.length() <= fourBit.length()) {
+        if (value.length() <= LengthLimit4Bit) {
             CC = value;
             CCUpdateRequired = true;
         } else {
@@ -180,15 +191,15 @@ public class Registers {
         return status;
     }
 
-    // IR getter, returns value of IR
+    // Returns value of IR
     public String getIR() {
         return IR;
     }
 
-    // IR setter, see GPR documentation
+    // Sets the IR with the value provided; Indicates an overflow if overflow occurs
     public String setIR(String value) {
         String status = Valid;
-        if (value.length() <= sixteenBit.length()) {
+        if (value.length() <= LengthLimit16Bit) {
             IR = value;
             IRUpdateRequired = true;
         } else {
@@ -197,15 +208,15 @@ public class Registers {
         return status;
     }
 
-    // MAR getter, returns value of MAR
+    // Returns value of MAR
     public String getMAR() {
         return MAR;
     }
 
-    // MAR setter, see GPR documentation
+    // Sets the MAR with the value provided; Indicates an overflow if overflow occurs
     public String setMAR(String value) {
         String status = Valid;
-        if (value.length() <= sixteenBit.length()) {
+        if (value.length() <= LengthLimit16Bit) {
             MAR = value;
             MARUpdateRequired = true;
         } else {
@@ -214,15 +225,15 @@ public class Registers {
         return status;
     }
 
-    // MBR getter, returns value of MBR
+    // Returns value of MBR
     public String getMBR() {
         return MBR;
     }
 
-    // MBR setter, see GPR documentation
+    // Sets the MBR with the value provided; Indicates an overflow if overflow occurs
     public String setMBR(String value) {
         String status = Valid;
-        if (value.length() <= sixteenBit.length()) {
+        if (value.length() <= LengthLimit16Bit) {
             MBR = value;
             MBRUpdateRequired = true;
         } else {
@@ -231,15 +242,15 @@ public class Registers {
         return status;
     }
 
-    // MSR getter, returns value of MSR
+    // Returns value of MSR
     public String getMSR() {
         return MSR;
     }
 
-    // MSR setter, see GPR documentation
+    // Sets the MSR with the value provided; Indicates an overflow if overflow occurs
     public String setMSR(String value) {
         String status = Valid;
-        if (value.length() <= sixteenBit.length()) {
+        if (value.length() <= LengthLimit16Bit) {
             MSR = value;
             MSRUpdateRequired = true;
         } else {
@@ -248,15 +259,15 @@ public class Registers {
         return status;
     }
 
-    // MFR getter, returns value of MFR
+    // Returns value of MFR
     public String getMFR() {
         return MFR;
     }
 
-    // MFR setter, see GPR documentation
+    // Sets the MFR with the value provided; Indicates an overflow if overflow occurs
     public String setMFR(String value) {
         String status = Valid;
-        if (value.length() <= fourBit.length()) {
+        if (value.length() <= LengthLimit4Bit) {
             MFR = value;
             MFRUpdateRequired = true;
         } else {
