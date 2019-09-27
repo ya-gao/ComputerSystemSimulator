@@ -397,6 +397,7 @@ public class simulator extends javax.swing.JFrame {
 	        System.out.println(str);
         Registers R = new Registers();
         Memory M = new Memory();
+        M.initializeMemory();
 	        // LDR Instruction
 
                 if(mem1!=0)
@@ -406,7 +407,7 @@ public class simulator extends javax.swing.JFrame {
                         // indirect addressing/indexing
                         // Calculating Effective Address
                         // Add M[mem] and IX1 to get EA in integer format
-                        int intEA = Integer.parseInt(M.getMemValue(R.getIX(ireg1)), 2) +
+                        int intEA = Integer.parseInt(M.getMemValue(R.getXR(ireg1)), 2) +
                                     Integer.parseInt(M.getMemValue(mem), 2);
                         // Convert integer EA into Binary String with leading zeros
                         String EA = String.format("%016d", Integer.toBinaryString(intEA));
@@ -427,7 +428,7 @@ public class simulator extends javax.swing.JFrame {
                      */
                     R.setMAR(mem);
                     // Fetch M[MAR] into MBR
-                    R.serMBR(M.getMemValue(R.getMAR()));
+                    R.setMBR(M.getMemValue(R.getMAR()));
                     // Move the content of MBR into designated GPR
                     R.setGPR(reg1, R.getMBR());
                 }
