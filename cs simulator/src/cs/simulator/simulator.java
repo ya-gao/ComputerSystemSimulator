@@ -18,7 +18,7 @@ public class simulator extends javax.swing.JFrame {
     /**
      * Creates new form simulator
      */
-    public simulator() {
+    public simulator() throws Exception{
         initComponents();
         store.setEnabled(false);
         load.setEnabled(false);
@@ -62,7 +62,7 @@ public class simulator extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents() throws Exception {
 
         ipl = new javax.swing.JButton();
         load = new javax.swing.JButton();
@@ -110,7 +110,11 @@ public class simulator extends javax.swing.JFrame {
         load.setText("Load");
         load.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadActionPerformed(evt);
+                try {
+                    loadActionPerformed(evt);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -578,7 +582,7 @@ public class simulator extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])throws Exception {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -605,7 +609,11 @@ public class simulator extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new simulator().setVisible(true);
+                try {
+                    new simulator().setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
