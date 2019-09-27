@@ -1,5 +1,6 @@
 package Registers;
 
+
 public class Registers {
     int numOfGPR = 4;
     int numOfXR = 3;
@@ -37,7 +38,7 @@ public class Registers {
 
     public String Valid = "Valid Register Number and Value";
     public String InvalidRegNum = "Invalid Register Number";
-    public String Overflow = "The Value causes Overflow";
+    public String Overflow = "The Value Causes Overflow";
 
     // Registers Constructor
     public Registers() {
@@ -72,6 +73,16 @@ public class Registers {
         MSRUpdateRequired = false;
         MFRUpdateRequired = false;
 
+        // give some random value to all the registers
+        GPR[0] = "0101101001010011";
+        GPR[1] = "1010010110010110";
+        GPR[2] = "01010100101010101";
+        GPR[3] = "01010101010101100";
+        XR[0] = "0101010110100101";
+        XR[1] = "0101010101010110";
+        XR[2] = "0101101011101001";
+        PC = "011010111010";
+        CC = "0110";
     }
 
     // return the value in GPR if the register number is valid, otherwise return InvalidRegNum
