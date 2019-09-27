@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cs.simulator;
+package simulator;
 
 /**
  *
@@ -309,7 +309,7 @@ public class simulator extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_irActionPerformed
 
-    private void loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadActionPerformed
+    private void loadActionPerformed(java.awt.event.ActionEvent evt) throws Exception{//GEN-FIRST:event_loadActionPerformed
                     // TODO add your handling code here:
                     
                     String instruction= input.getText();
