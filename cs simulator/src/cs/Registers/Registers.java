@@ -174,6 +174,11 @@ public class Registers {
         return status;
     }
 
+    // increment PC by one
+    public void incrementPC() {
+        setPC(Integer.toBinaryString(Integer.parseInt(getPC(), 2) + 1));
+    }
+
     // Returns value of CC
     public String getCC() {
         return CC;
