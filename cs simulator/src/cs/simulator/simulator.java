@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package simulator;
+package cs.simulator;
 
 /**
  *
@@ -11,47 +11,27 @@ package simulator;
  */
 
 import Registers.*;
-import Memory.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class simulator extends javax.swing.JFrame {
 
     /**
      * Creates new form simulator
+     
      */
-    public simulator() throws Exception{
-        initComponents();
-        store.setEnabled(false);
-        load.setEnabled(false);
-        halt.setEnabled(false);
-        r0.setEnabled(false);
-        r1.setEnabled(false);
-        r2.setEnabled(false);
-        r3.setEnabled(false);
-        pc.setEnabled(false);
-        mar.setEnabled(false);
-        mbr.setEnabled(false);
-        mfr.setEnabled(false);
-        cc.setEnabled(false);
-        ixr1.setEnabled(false);
-        ixr2.setEnabled(false);
-        ixr3.setEnabled(false);
-        ir.setEnabled(false);
-        input.setEnabled(false);
-        jLabel1.setEnabled(false);
-        jLabel2.setEnabled(false);
-        jLabel3.setEnabled(false);
-        jLabel4.setEnabled(false);
-        jLabel5.setEnabled(false);
-        jLabel6.setEnabled(false);
-        jLabel7.setEnabled(false);
-        jLabel8.setEnabled(false);
-        jLabel9.setEnabled(false);
-        jLabel10.setEnabled(false);
-        jLabel11.setEnabled(false);
-        jLabel12.setEnabled(false);
-        jLabel13.setEnabled(false);
-        jLabel15.setEnabled(false);
-
+    static int l1=0;
+    String opcode,reg,ireg,mem,indirectadd,q;
+    int opcode1,reg1,ireg1,mem1,indirectadd1,q1;
+    int EA;
+    Registers r=new Registers();
+    static int m[]=new int[2048];
+    
+    public simulator() 
+    { 
+        initComponents();       // It is used to create components
+       
+        
         
     }
 
@@ -62,11 +42,11 @@ public class simulator extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() throws Exception {
+    private void initComponents() {
 
         ipl = new javax.swing.JButton();
-        load = new javax.swing.JButton();
-        store = new javax.swing.JButton();
+        run = new javax.swing.JButton();
+        singlestep = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         input = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
@@ -97,6 +77,9 @@ public class simulator extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         ir = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        Log = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        log = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,21 +90,17 @@ public class simulator extends javax.swing.JFrame {
             }
         });
 
-        load.setText("Load");
-        load.addActionListener(new java.awt.event.ActionListener() {
+        run.setText("run");
+        run.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    loadActionPerformed(evt);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                runActionPerformed(evt);
             }
         });
 
-        store.setText("Store");
-        store.addActionListener(new java.awt.event.ActionListener() {
+        singlestep.setText("singlestep");
+        singlestep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                storeActionPerformed(evt);
+                singlestepActionPerformed(evt);
             }
         });
 
@@ -177,6 +156,13 @@ public class simulator extends javax.swing.JFrame {
 
         jLabel15.setText("Input");
 
+        Log.setText("Log");
+
+        log.setEditable(false);
+        log.setColumns(20);
+        log.setRows(5);
+        jScrollPane2.setViewportView(log);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -213,19 +199,20 @@ public class simulator extends javax.swing.JFrame {
                     .addComponent(ir)
                     .addComponent(ixr2))
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                    .addComponent(Log)
+                    .addComponent(jScrollPane2)))
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(ipl, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56)
                 .addComponent(halt, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68)
-                .addComponent(load, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(run, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69)
-                .addComponent(store, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(singlestep, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
@@ -235,8 +222,8 @@ public class simulator extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(halt, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                        .addComponent(load, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(store, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(run, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(singlestep, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(ipl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,12 +248,16 @@ public class simulator extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(pc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(mar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(pc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(mar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Log))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(mbr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -281,26 +272,27 @@ public class simulator extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ixr1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ixr2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(ixr3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(ir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1))
+                            .addComponent(ixr1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ixr2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(ixr3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(ir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void r3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_r3ActionPerformed
@@ -312,196 +304,44 @@ public class simulator extends javax.swing.JFrame {
     private void irActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_irActionPerformed
-
-    private void loadActionPerformed(java.awt.event.ActionEvent evt) throws Exception{//GEN-FIRST:event_loadActionPerformed
-                    // TODO add your handling code here:
-                    
-                    String instruction= input.getText();
-                  String opcode = instruction.substring(0,3);
-	        String reg = instruction.substring(4,5);
-                int reg1= Integer.parseInt(reg);
-	        String ireg = instruction.substring(6,7);
-                int ireg1= Integer.parseInt(ireg);
-	        String mem = instruction.substring(8,9);
-                int mem1= Integer.parseInt(mem);
-	        String indirectadd = instruction.substring(10);
-                int indirectadd1= Integer.parseInt(indirectadd);
-        switch (opcode) {
-            case "LDR":
-                opcode = "000000";
-                break;
-            case "STR":
-                opcode = "000010";
-                break;
-            case "LDA":
-                opcode = "000011";
-                break;
-            case "LDX":
-                opcode = "101001";
-                break;
-            default:
-                opcode = "101010";
-                break;
-        }
-
-        switch (reg) {
-            case "0":
-                reg = "00";
-                break;
-            case "1":
-                reg = "01";
-                break;
-            case "2":
-                reg = "10";
-                break;
-            case "3":
-                reg = "11";
-                break;
-            default:
-                break;
-        }
-        switch (ireg) {
-            case "0":
-                ireg = "00";
-                break;
-            case "1":
-                ireg = "01";
-                break;
-            case "2":
-                ireg = "10";
-                break;
-            case "3":
-                ireg = "11";
-                break;
-            default:
-                break;
-        }
-                //String s1="10";
-         int j= Integer.parseInt(indirectadd);
-        // System.out.println(j);
-         String q= Integer.toBinaryString(j);
-         int j1= Integer.parseInt(q);
-         //System.out.println(j1);
-         int count=0;
-         while(j1>0)
-         {
-             j1=j1/10;
-             count=count+1;
-             
-         }
-         int count1=5-count;
-         while(count1!=0)
-         {
-             q=0+q;
-             count1--;
-         }
-                //  System.out.println(q);
-
-	        String str = opcode + reg + ireg + mem + q;
-	        System.out.println(str);
-        Registers R = new Registers();
-        Memory M = new Memory();
-        M.initializeMemory();
-	        // LDR Instruction
-
-                if(mem1!=0)
-                {
-                    if(ireg1!=00)
-                    {
-                        // indirect addressing/indexing
-                        // Calculating Effective Address
-                        // Add M[mem] and IX1 to get EA in integer format
-                        int intEA = Integer.parseInt(M.getMemValue(R.getXR(ireg1)), 2) +
-                                    Integer.parseInt(M.getMemValue(mem), 2);
-                        // Convert integer EA into Binary String with leading zeros
-                        String EA = String.format("%016d", Integer.toBinaryString(intEA));
-                        // Set MAR with EA
-                        R.setMAR(EA);
-                        // Fetch M[MAR] into MBR
-                        R.setMBR(M.getMemValue(R.getMAR()));
-                        // Move the content of MBR into designated GPR
-                        R.setGPR(reg1, R.getMBR());
-                    }
-                }
-                else
-                {
-                    // NO indirect addressing, fetch the data stored at the address(ending part)
-                    // Move content of M[mem] into MAR
-                    /*
-                     * Object R and M should be created when clicking the IPL button
-                     */
-                    R.setMAR(mem);
-                    // Fetch M[MAR] into MBR
-                    R.setMBR(M.getMemValue(R.getMAR()));
-                    // Move the content of MBR into designated GPR
-                    R.setGPR(reg1, R.getMBR());
-                }
-    }//GEN-LAST:event_loadActionPerformed
-
+               
     private void iplActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iplActionPerformed
-        //ipl.setEnabled(false);
-        //loadActionPerformed()
-        store.setEnabled(true);
-        load.setEnabled(true);
-        halt.setEnabled(true);
-        r0.setEnabled(true);
-        r1.setEnabled(true);
-        r2.setEnabled(true);
-        r3.setEnabled(true);
-        pc.setEnabled(true);
-        mar.setEnabled(true);
-        mbr.setEnabled(true);
-        mfr.setEnabled(true);
-        cc.setEnabled(true);
-        ixr1.setEnabled(true);
-        ixr2.setEnabled(true);
-        ixr3.setEnabled(true);
-        ir.setEnabled(true);
-        input.setEnabled(true);
-        jLabel1.setEnabled(true);
-        jLabel2.setEnabled(true);
-        jLabel3.setEnabled(true);
-        jLabel4.setEnabled(true);
-        jLabel5.setEnabled(true);
-        jLabel6.setEnabled(true);
-        jLabel7.setEnabled(true);
-        jLabel8.setEnabled(true);
-        jLabel9.setEnabled(true);
-        jLabel10.setEnabled(true);
-        jLabel11.setEnabled(true);
-        jLabel12.setEnabled(true);
-        jLabel13.setEnabled(true);
-        jLabel15.setEnabled(true);
-        Memory m=new Memory();
-        try {
-            m.setMemValue("10","0010");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            System.out.println(m.getMemValue("1000"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
+        // When the button ipl is clicked on the simulator the program gets loaded with some instructions specified//
+        input.setText("LDA 3,1,0,11" +"\n"+"LDR 1,2,0,12"+"\n"+"LDX 0,2,0,13"+"\n"+"STR 2,1,0,14"+"\n"+"STX 1,1,0,15");
+        pc.setText(r.getPC());
+        m[11]=21;
+        m[12]=22;
+        m[13]=23;
+        m[14]=24;
+        m[15]=25;
+        m[16]=26;
+        log.setText("ipl complete"+"\n");
+        
     }//GEN-LAST:event_iplActionPerformed
 
-    private void storeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeActionPerformed
-        // TODO add your handling code here:
-         String instruction= input.getText();
-                  String opcode = instruction.substring(0,3);
-	        String reg = instruction.substring(4,5);
-                int reg1= Integer.parseInt(reg);
-	        String ireg = instruction.substring(6,7);
-                int ireg1= Integer.parseInt(ireg);
-	        String mem = instruction.substring(8,9);
-                int mem1= Integer.parseInt(mem);
-	        String indirectadd = instruction.substring(10);
-                int indirectadd1= Integer.parseInt(indirectadd);
-        switch (opcode) {
+    private void singlestepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singlestepActionPerformed
+        // This action is performed whenever user presses singlestep button on the simulator
+        // This is used to handle multiple instructions by executing one instruction at a time 
+        String z[]= (input.getText()).split("\n"); // it is used to capture the input text and divide into an array
+           
+        if(l1<z.length)
+        {
+           String instruction=z[l1];
+                                                            // Decoding begins
+        
+                opcode = instruction.substring(0,3);      //spliting the string into sub parts using substring method
+	        reg = instruction.substring(4,5);
+               
+	        ireg = instruction.substring(6,7);
+                
+	         mem = instruction.substring(8,9);
+                
+	         indirectadd = instruction.substring(10);
+                
+                
+        switch (opcode) {                       //Checking for opcode value and setting the value to it because opcode values are predefined 
             case "LDR":
-                opcode = "000000";
+                opcode = "000001";
                 break;
             case "STR":
                 opcode = "000010";
@@ -512,12 +352,14 @@ public class simulator extends javax.swing.JFrame {
             case "LDX":
                 opcode = "101001";
                 break;
-            default:
+            case "STX":
                 opcode = "101010";
+                break;
+            default:
                 break;
         }
 
-        switch (reg) {
+        switch (reg) {                      //Checking for register value 
             case "0":
                 reg = "00";
                 break;
@@ -533,7 +375,7 @@ public class simulator extends javax.swing.JFrame {
             default:
                 break;
         }
-        switch (ireg) {
+        switch (ireg) {                         // checking for index register value
             case "0":
                 ireg = "00";
                 break;
@@ -549,12 +391,254 @@ public class simulator extends javax.swing.JFrame {
             default:
                 break;
         }
-                //String s1="10";
+                
          int j= Integer.parseInt(indirectadd);
-        // System.out.println(j);
-         String q= Integer.toBinaryString(j);
+        
+          q= Integer.toBinaryString(j);
          int j1= Integer.parseInt(q);
-         //System.out.println(j1);
+         
+         int count=0;
+         while(j1>0)                         
+         {
+             j1=j1/10;
+             count=count+1;
+             
+         }
+         int count1=5-count;
+         while(count1!=0)
+         {
+             q=0+q;
+             count1--;
+         }
+                
+
+	        String str =opcode+ reg + ireg + mem + q;   // Captured the whole string i.e. instruction and converted it into binary format
+                int dec=Integer.parseInt(str,2);
+                q1=Integer.parseInt(q,2);// address
+                ireg1=Integer.parseInt(ireg,2);// index register value
+                reg1=Integer.parseInt(reg,2);// register value
+              
+                if(opcode=="000001") //ldr(load register from memory i.e. we fetch the contents of memory location given in the instruction and store it in the register specified in the instruction    r=m[]
+                {
+                    r.setGPR(reg1, String.valueOf(m[q1]));      //setting the value of register
+                   
+                    if(reg1==0)
+                        {
+                            r0.setText(r.getGPR(reg1));         // displaying the register 0 value after ldr function
+                        }
+                    else if(reg1==1)
+                        {
+                          r1.setText(r.getGPR(reg1));           // displaying the register 1 value after ldr function
+                         }
+                    else if(reg1==2)
+                        {
+                           r2.setText(r.getGPR(reg1));          // displaying the register 2 value after ldr function
+                        }
+                    else if(reg1==3)
+                        {
+                            r3.setText(r.getGPR(reg1));         // displaying the register 3 value after ldr function
+                         }
+                    
+                }
+                else if(opcode=="000011") //lda (load register with address i.e. r=address)
+                {
+                    r.setGPR(reg1, String.valueOf(q1));         //setting the value of register
+                    if(reg1==0) 
+                        {
+                            r0.setText(r.getGPR(reg1));
+                        }
+                    else if(reg1==1)
+                        {
+                          r1.setText(r.getGPR(reg1));
+                         }
+                    else if(reg1==2)
+                        {
+                           r2.setText(r.getGPR(reg1));
+                        }
+                    else if(reg1==3)
+                        {
+                            r3.setText(r.getGPR(reg1));
+                         }
+                }
+                else if(opcode=="101001")//ldx(Load index register from memory i.e. ir=m[addr] stroing the index register value with the value associated with given address in the instruction
+                {
+                    r.setXR(ireg1, String.valueOf(m[q1]));  //setting index register value
+                   if(ireg1==0)
+                        {
+                            //will use this for future purpose
+                        }
+                    else if(ireg1==1)
+                        {
+                          ixr1.setText(r.getXR(ireg1));
+                          
+                         }
+                    else if(ireg1==2)
+                        {
+                           ixr2.setText(r.getXR(ireg1));
+                        
+                        }
+                    else if(ireg1==3)
+                        {
+                            ixr3.setText(r.getXR(ireg1));
+                            
+                         }
+                }
+                else if(opcode=="000010")//str(Store register to memory i.e. m[]=c[r] fetch the contents of the resgister and store it to the memory
+                {
+                    m[q1]=Integer.parseInt(r.getGPR(reg1)); //storing data into memory
+                     if(reg1==0)
+                        {
+                            r0.setText(r.getGPR(reg1));
+                        }
+                    else if(reg1==1)
+                        {
+                          r1.setText(r.getGPR(reg1));
+                         }
+                    else if(reg1==2)
+                        {
+                           r2.setText(r.getGPR(reg1));
+                        }
+                    else if(reg1==3)
+                        {
+                            r3.setText(r.getGPR(reg1));
+                         }
+                   
+                }
+                else if(opcode=="101010")//stx i.e. store index register to memory m[]=c[ir] fetch the contents of index register to the memory
+                {
+                    m[q1]=Integer.parseInt(r.getXR(ireg1)); //storing the data into memory
+                    if(ireg1==0)
+                        {
+                           // Do nothing for now( for future purpose)
+                        }
+                    else if(ireg1==1)
+                        {
+                          ixr1.setText(r.getXR(ireg1));
+                          
+                         }
+                    else if(ireg1==2)
+                        {
+                           ixr2.setText(r.getXR(ireg1));
+                        
+                        }
+                    else if(ireg1==3)
+                        {
+                            ixr3.setText(r.getXR(ireg1));
+                            
+                         }
+                    
+                }
+                
+                r.setMAR(r.getPC());                        //setting MAR value
+                mar.setText(r.getMAR());                    //Displaying MAR value
+                r.setMBR(String.valueOf(dec));              //setting MBR value
+                mbr.setText(r.getMBR());                    //Displaying MBR value
+                r.setIR(String.valueOf(dec));               //setting IR value
+                ir.setText(r.getIR());                      //Displaying IR value
+                int t= Integer.parseInt(r.getPC())+1;       //Whenever the the next instruction is ready pc value will increment by one
+                r.setPC(String.valueOf(t));
+                pc.setText(r.getPC());
+               
+        log.setText(log.getText()+"Register value(R"+reg1+")"+":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
+        log.setText(log.getText()+""+r.getGPR(reg1));                     
+        log.setText(log.getText()+"\n");
+        log.setText(log.getText()+"MAR value:");        
+        log.setText(log.getText()+""+r.getMAR());
+        log.setText(log.getText()+"\n");
+        log.setText(log.getText()+"MBR value:");
+        log.setText(log.getText()+""+r.getMBR());
+        log.setText(log.getText()+"\n");
+        log.setText(log.getText()+"IR value:");
+        log.setText(log.getText()+""+r.getIR());
+        log.setText(log.getText()+"\n");
+        log.setText(log.getText()+"PC value:");
+        log.setText(log.getText()+""+r.getPC());
+        log.setText(log.getText()+"\n");        
+        
+        l1++;
+        }
+        
+
+        
+    }//GEN-LAST:event_singlestepActionPerformed
+
+    private void runActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runActionPerformed
+        // This function/action is used to run multiple instructions at a time
+        String z[]= (input.getText()).split("\n");
+           int l=0;
+        while(l<z.length)
+        {
+           String instruction=z[l];      //Now we are running and updating values at a time
+          
+        
+                opcode = instruction.substring(0,3);
+	        reg = instruction.substring(4,5);
+              
+	        ireg = instruction.substring(6,7);
+                
+	         mem = instruction.substring(8,9);
+                
+	         indirectadd = instruction.substring(10);
+                
+                                                        
+        switch (opcode) {//Checking for opcode value and setting the value to it because opcode values are predefined
+            case "LDR":
+                opcode = "000001";
+                break;
+            case "STR":
+                opcode = "000010";
+                break;
+            case "LDA":
+                opcode = "000011";
+                break;
+            case "LDX":
+                opcode = "101001";
+                break;
+            case "STX":
+                opcode = "101010";
+                break;
+            default:
+                break;
+        }
+
+        switch (reg) {                      //Checking for register value
+            case "0":
+                reg = "00";
+                break;
+            case "1":
+                reg = "01";
+                break;
+            case "2":
+                reg = "10";
+                break;
+            case "3":
+                reg = "11";
+                break;
+            default:
+                break;
+        }
+        switch (ireg) {                     //Checking for indirect register
+            case "0":
+                ireg = "00";
+                break;
+            case "1":
+                ireg = "01";
+                break;
+            case "2":
+                ireg = "10";
+                break;
+            case "3":
+                ireg = "11";
+                break;
+            default:
+                break;
+        }
+                
+         int j= Integer.parseInt(indirectadd);
+        
+          q= Integer.toBinaryString(j);
+         int j1= Integer.parseInt(q);
+         
          int count=0;
          while(j1>0)
          {
@@ -568,31 +652,134 @@ public class simulator extends javax.swing.JFrame {
              q=0+q;
              count1--;
          }
-                //  System.out.println(q);
+               
 
-	        String str = opcode + reg + ireg + mem + q;
-	        System.out.println(str);
-                if(mem1!=0)
+	        String str =opcode+ reg + ireg + mem + q; //captured string in binary format
+                int dec=Integer.parseInt(str,2);
+                q1=Integer.parseInt(q,2);// address
+                ireg1=Integer.parseInt(ireg,2);// index register value
+                reg1=Integer.parseInt(reg,2);// register value
+               
+                if(opcode=="000001") //ldr(load register from memory i.e. we fetch the contents of memory location given in the instruction and store it in the register specified in the instruction 
                 {
-                    if(ireg1!=00)
-                    {
-                        // fetch the data stored at IX register which will be an address
-                        // add the data fetched with the address given in instruction
-                        // load the resultant data into register
-                    }
+                    r.setGPR(reg1, String.valueOf(m[q1]));
+                  
+                    if(reg1==0)
+                        {
+                            r0.setText(r.getGPR(reg1));
+                        }
+                    else if(reg1==1)
+                        {
+                          r1.setText(r.getGPR(reg1));
+                         }
+                    else if(reg1==2)
+                        {
+                           r2.setText(r.getGPR(reg1));
+                        }
+                    else if(reg1==3)
+                        {
+                            r3.setText(r.getGPR(reg1));
+                         }
+                    
                 }
-                else
+                else if(opcode=="000011") //lda // load register with address
                 {
-                    // fetch the data stored at the address(ending part)
-                    // store the data to memory from register
+                    r.setGPR(reg1, String.valueOf(q1));
+                    if(reg1==0)
+                        {
+                            r0.setText(r.getGPR(reg1));
+                        }
+                    else if(reg1==1)
+                        {
+                          r1.setText(r.getGPR(reg1));
+                         }
+                    else if(reg1==2)
+                        {
+                           r2.setText(r.getGPR(reg1));
+                        }
+                    else if(reg1==3)
+                        {
+                            r3.setText(r.getGPR(reg1));
+                         }
                 }
+                else if(opcode=="101001")//ldx
+                {
+                    r.setXR(ireg1, String.valueOf(m[q1]));
+                   if(ireg1==0)
+                        {
+                          
+                        }
+                    else if(ireg1==1)
+                        {
+                          ixr1.setText(r.getXR(ireg1));
+                         }
+                    else if(ireg1==2)
+                        {
+                           ixr2.setText(r.getXR(ireg1));
+                        }
+                    else if(ireg1==3)
+                        {
+                            ixr3.setText(r.getXR(ireg1));
+                         }
+                }
+                else if(opcode=="000010")//str // m[]=c[r]
+                {
+                    m[q1]=Integer.parseInt(r.getGPR(reg1));
+                   
+                }
+                else if(opcode=="101010")//stx// m[]=c[ir]
+                {
+                    
+                    
+                    m[q1]=Integer.parseInt(r.getXR(ireg1));
+                    
+                }
+                
+                r.setMAR(r.getPC());                //setting MAR value
+                mar.setText(r.getMAR());            //Displaying MAR value
+                r.setMBR(String.valueOf(dec));      //setting MBR value
+                mbr.setText(r.getMBR());            //Displaying MBR value
+                r.setIR(String.valueOf(dec));       //setting IR value
+                ir.setText(r.getIR());              //Displaying IR value
+                int t= Integer.parseInt(r.getPC())+1;
+                r.setPC(String.valueOf(t));
+                pc.setText(r.getPC());
+                
         
-    }//GEN-LAST:event_storeActionPerformed
+                
+            
+        
+        l++;
+        }
+        log.setText(log.getText()+"Register value(R"+reg1+")"+":");
+        log.setText(log.getText()+""+r.getGPR(reg1));
+        log.setText(log.getText()+"\n");
+        log.setText(log.getText()+"MAR value:");
+        log.setText(log.getText()+""+r.getMAR());
+        log.setText(log.getText()+"\n");
+        log.setText(log.getText()+"MBR value:");
+        log.setText(log.getText()+""+r.getMBR());
+        log.setText(log.getText()+"\n");
+        log.setText(log.getText()+"IR value:");
+        log.setText(log.getText()+""+r.getIR());
+        log.setText(log.getText()+"\n");
+        log.setText(log.getText()+"PC value:");
+        log.setText(log.getText()+""+r.getPC());
+        log.setText(log.getText()+"\n");
+        
+ 
+
+
+
+                
+        
+     
+    }//GEN-LAST:event_runActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[])throws Exception {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -619,20 +806,17 @@ public class simulator extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new simulator().setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                new simulator().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Log;
     private javax.swing.JTextField cc;
-    private javax.swing.JButton halt;
+    public javax.swing.JButton halt;
     private javax.swing.JTextArea input;
-    private javax.swing.JButton ipl;
+    public javax.swing.JButton ipl;
     private javax.swing.JTextField ir;
     private javax.swing.JTextField ixr1;
     private javax.swing.JTextField ixr2;
@@ -652,7 +836,8 @@ public class simulator extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton load;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea log;
     private javax.swing.JTextField mar;
     private javax.swing.JTextField mbr;
     private javax.swing.JTextField mfr;
@@ -661,6 +846,7 @@ public class simulator extends javax.swing.JFrame {
     private javax.swing.JTextField r1;
     private javax.swing.JTextField r2;
     private javax.swing.JTextField r3;
-    private javax.swing.JButton store;
+    public javax.swing.JButton run;
+    public javax.swing.JButton singlestep;
     // End of variables declaration//GEN-END:variables
 }
