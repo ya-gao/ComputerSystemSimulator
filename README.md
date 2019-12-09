@@ -1,5 +1,6 @@
 # ComputerSystemSimulator
-In this project we will design, implement and test a simulator to simulate a basic machine. The project principally focusing on the ISA and how it is executed, memory structure, and simple I/O capabilities. A deeper understanding of the design, structure, and operations of a computer system is addressed. What's more, we get to experience some of the tradeoff decisions that computer designers make.
+
+In this project we design, implement and test a simulator to simulate a basic machine. Our computer is a 16-bit processor that eventually accommodates both fixed-point and floating-point arithmetic operations. Unified cahe with fully associate mapping, vector operations, and simple pipeline are implemented. 
 
 ![Front Panel after Clicking on IPL](FrontPanel.png)
 
@@ -7,30 +8,25 @@ In this project we will design, implement and test a simulator to simulate a bas
 
 - [Background](#background)
 - [Install](#install)
-- [Usage](#usage)
+- [Implementation](#implementation)
 - [Contributors](#contributors)
 
 ## Background
 
-Our computer is a 16-bit processor that eventually accommodates both fixed-point and floating-point arithmetic operations. Unified cahe with fully associate mapping, vactor operations, and simple pipeline are implemented. 
-
-Project Mannual is avilable at:
-http://www.mslcourses.com/CSCI6461Section10Fall2019/AdaptedKaislerFiles/ClassProjectDescription.doc
+The project principally focusing on the ISA and how it is executed, memory structure, and simple I/O capabilities. A deeper understanding of the design, structure, and operations of a computer system is addressed. What's more, we get to experience some of the tradeoff decisions that computer designers make. 
 
 ## Install
-### Run Simulator
-You can choose either: 
+
+To operate the simulator, you can choose either: 
 
 - [ ] Run the pre-compiled JAR file [cs_simulator.jar](cs.simulator.jar)
 
 - [ ] Manually compile the project by cloning it to your local computer.
 
-### User Guide
+For more details on how to operate the simulator, please refer to [UserGuide.md](UserGuide.md).
 
-For more details on how to use the simulator and what happens when you click on the buttons, please refer to [UserGuide.md](UserGuide.md).
+## Implementation
 
-## Usage
-### Implementation Details
 The project is structured into six packages, which are cs, Memory, Registers, Instruction, Utilities and program. 
 
 1. CS: The simulator class in this package implemented the user interface. For more details on how to use the simulator and what happens when you click on the button, please refer to [UserGuide.md](UserGuide.md).
@@ -45,17 +41,13 @@ The project is structured into six packages, which are cs, Memory, Registers, In
 
 6. program: Program package includes program1.class and program2.class. In program1.class, program1.txt will be read in and sent into our simulator. In program2.class, program2.txt will be read in and sent into our simulator. 
 
-For more information, please refer to [DesignNotes.md](DesignNotes.md)
+There are two testing programs written in assembly code: 
 
-### Testing Programs
+Program 1: reads 20 numbers (integers) from the keyboard, prints the numbers to the console printer, requests a number from the user, and searches the 20 numbers read in for the number closest to the number entered by the user. Print the number entered by the user and the number closest to that number. Your numbers should not be 1…10, but distributed over the range of 0 … 65,535. Therefore, as you read a character in, you need to check it is a digit, convert it to a number, and assemble the integer.
 
-1. Testing Program 1
+Program 2: reads a set of a paragraph of 6 sentences from a file into memory. It prints the sentences on the console printer. It then asks the user for a word. It searches the paragraph to see if it contains the word. If so, it prints out the word, the sentence number, and the word number in the sentence.
 
-A program that reads 20 numbers (integers) from the keyboard, prints the numbers to the console printer, requests a number from the user, and searches the 20 numbers read in for the number closest to the number entered by the user. Print the number entered by the user and the number closest to that number. Your numbers should not be 1…10, but distributed over the range of 0 … 65,535. Therefore, as you read a character in, you need to check it is a digit, convert it to a number, and assemble the integer.
-
-2. Testing Program 2
-
-A program that reads a set of a paragraph of 6 sentences from a file into memory. It prints the sentences on the console printer. It then asks the user for a word. It searches the paragraph to see if it contains the word. If so, it prints out the word, the sentence number, and the word number in the sentence.
+For more information, please refer to [DesignNotes.md](DesignNotes.md) and [ProjectDescription.md](ProjectDescription.md).
 
 ## Contributors
 [@ya-gao](https://github.com/ya-gao)
