@@ -19,7 +19,7 @@ The project principally focusing on the ISA and how it is executed, memory struc
 
 To operate the simulator, you can choose either: 
 
-- [ ] Run the pre-compiled JAR file [cs_simulator.jar](cs.simulator.jar)
+- [ ] Run the pre-compiled JAR file [cs_simulator.jar](simulator/cs_simulator.jar)
 
 - [ ] Manually compile the project by cloning it to your local computer.
 
