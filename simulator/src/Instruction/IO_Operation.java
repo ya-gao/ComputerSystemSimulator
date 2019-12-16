@@ -11,6 +11,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 
+/**
+ * @author Ya
+ */
+
 public class IO_Operation {
     Memory mem;
     Registers R;
@@ -21,7 +25,7 @@ public class IO_Operation {
     String str;
     String s;
     String op;
- public static String convertWordToInt(String word){
+    public static String convertWordToInt(String word){
         char[] Word=word.toCharArray();
         int[] array=new int[word.length()];
         StringBuffer str=new StringBuffer();
@@ -31,7 +35,8 @@ public class IO_Operation {
         }
         String str1=str.toString();
         return str1;
-        }
+    }
+
     public void input() throws Exception {
         //get data from the window ,and assume the value is str
         
@@ -122,13 +127,7 @@ public class IO_Operation {
                 }
             }
 
-            // separate paragraph into 6 sentences
-            //        Pattern re = Pattern.compile("[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)", Pattern.MULTILINE | Pattern.COMMENTS);
-            // Matcher reMatcher = re.matcher(paraStr);
-            //while (reMatcher.find()) {
-            //System.out.println(reMatcher.group());
-
-            // }
+            
             System.out.println(paraStr);
             R.setGPR(intGPR, paraStr);
             String[] arrOfSent = paraStr.split("[.?!]");
@@ -147,7 +146,7 @@ public class IO_Operation {
             // store words from mem[100], store start of sentence from mem[500]
             String wordAddress = "100";
             String sentAddress = "500";
-//System.out.println("hi");
+
             for (String sent : arrOfSent) {
                 // remove special characters in sentence
 
@@ -200,11 +199,7 @@ public class IO_Operation {
             cs.simulator.simulator.mbr.setText(R.getMBR());                    //Displaying MBR value
             R.setIR(String.valueOf(dec));               //setting IR value
             cs.simulator.simulator.ir.setText(R.getIR());                      //Displaying IR value
-            //Whenever the the next instruction is ready pc value will increment by one
-            // R.incrementPC();
-            //reg.setPC(String.valueOf(t));
-            // cs.simulator.simulator.pc.setText(R.getPC());
-
+            
 
             cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MAR value:");
             cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMAR());

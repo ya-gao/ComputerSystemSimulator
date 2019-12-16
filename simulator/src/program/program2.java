@@ -22,8 +22,9 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
- * @author dilipvarma
+ * @author Ya
  */
+
 public class program2 {
     Memory mem = new Memory();
     Registers R = new Registers();

@@ -3,6 +3,10 @@ package Utilities;
 import Memory.Memory;
 import Registers.Registers;
 
+/**
+ * @author Ya
+ */
+
 public class EffectiveAddress {
     public static String computeEA(int I, int IX, String Address, Registers reg, Memory mem) throws Exception {
         //Address here should be binary String type

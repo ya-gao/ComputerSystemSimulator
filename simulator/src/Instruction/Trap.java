@@ -10,6 +10,10 @@ import javax.swing.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Zixiang
+ */
+
 public class Trap {
 
 

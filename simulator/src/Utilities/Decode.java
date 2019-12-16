@@ -17,6 +17,10 @@ import cs.simulator.simulator;
 
 import javax.swing.JFrame;
 
+/**
+ * @author Zixiang
+ */
+
 public class Decode {//to decode an instruction written in English into binary code
     Registers r;
     Memory m;

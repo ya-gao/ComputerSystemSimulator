@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
+/**
+ * @author Zixiang
+ */
+
 public class Memory {
     public static int MEMORY_MAX_LENGTH= 2048; //Max size is 2048 words
     public static int MaxValue = 65536; //Max value is 2^16

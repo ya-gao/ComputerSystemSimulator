@@ -2,6 +2,10 @@ package Memory;
 
 import java.util.LinkedList;
 
+/**
+ * @author Zixiang
+ */
+
 public class Cache {//Cache is composed of many cachelines,and in this case, the number of cachelines should be 16
     int address;
     int value;

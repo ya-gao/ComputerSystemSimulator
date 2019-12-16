@@ -1,5 +1,9 @@
 package Utilities;
 
+/**
+ * @author Zixiang
+ */
+
 public class MachineFaultException extends Exception{
     //We use this class in three places,
     // Effective address calculating, running instructions and checking Trap code

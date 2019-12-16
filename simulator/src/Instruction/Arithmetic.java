@@ -5,6 +5,10 @@ import Registers.Registers;
 import Utilities.EffectiveAddress;
 import cs.simulator.simulator;
 
+/**
+ * @author Ya
+ */
+
 public class Arithmetic {
 
     Memory mem;
@@ -26,7 +30,8 @@ public class Arithmetic {
 
     }
 
-    public void AMR(String[] instruction) throws Exception {// AMR: Add Memory To Register
+    // AMR: Add Memory To Register
+    public void AMR(String[] instruction) throws Exception {
         GPR = instruction[1];
         IX = instruction[2];
         I = instruction[3];
@@ -34,8 +39,10 @@ public class Arithmetic {
         int intI = Integer.parseInt(I);
         intGPR = Integer.parseInt(GPR);
         address = EffectiveAddress.computeEA(intI, intIX, instruction[4], R, mem);
-        String value = String.valueOf(Integer.parseInt(R.getGPR(intGPR)) + Integer.parseInt(mem.getMemValue(address))); // value = c(reg) + c(EA)
-        R.setGPR(intGPR, value);                         // reg <- c(reg) + c(EA)
+        // value = c(reg) + c(EA)
+        String value = String.valueOf(Integer.parseInt(R.getGPR(intGPR)) + Integer.parseInt(mem.getMemValue(address))); 
+        // reg <- c(reg) + c(EA)
+        R.setGPR(intGPR, value);                         
         System.out.println("after amr:"+R.getGPR(intGPR));
         switch (intGPR) {
             case 0:
@@ -160,38 +167,27 @@ public class Arithmetic {
         cs.simulator.simulator.pc.setText(R.getPC());
         int j = Integer.parseInt(address);
 
-      q = Integer.toBinaryString(j);
+        q = Integer.toBinaryString(j);
         int j1 ;
 
         int count = 0;
-     /*   while (j1 > 0) {
-            j1 = j1 / 10;
-            count = count + 1;
-
-        }
-        if (count < 5) {
-            int count1 = 5 - count;
-            while (count1 != 0) {
-                q = 0 + q;
-                count1--;
-            }
-        }*/
-     j1=(int)(Math.log(j) /Math.log(2) + 1);
-     System.out.println("j1:"+j1);
+     
+        j1=(int)(Math.log(j) /Math.log(2) + 1);
+        System.out.println("j1:"+j1);
     
-     if(j1<=6)
-     {
-         count=6-j1;
-         while(count!=0)
-         {
-             q=0+q;
-             count--;
-         }
-     }
-     else
-     {
-        
-     }
+        if(j1<=6)
+        {
+            count=6-j1;
+            while(count!=0)
+            {
+                q=0+q;
+                count--;
+            }
+        }
+        else
+        {
+           
+        }
         s = instruction[0] + String.valueOf(Integer.toBinaryString(Integer.parseInt(GPR))) + String.valueOf(Integer.toBinaryString(Integer.parseInt(IX))) + I + q;
 
         //  s="0000011010010110";
@@ -203,7 +199,7 @@ public class Arithmetic {
         System.out.println(R.getPC());
         R.setMAR(R.getPC());
 
-      //  int dec=0;
+        //  int dec=0;
 
         cs.simulator.simulator.mar.setText(R.getMAR());                    //Displaying MAR value
         R.setMBR(String.valueOf(dec));              //setting MBR value

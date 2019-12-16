@@ -8,10 +8,14 @@ import cs.simulator.simulator;
 import  static Registers.Registers.Overflow;
 import  static Utilities.DataTypeConvert.padding;
 
+/**
+ * @author Ya
+ */
+
 public class Logical {
      Memory mem;
      Registers R;
-    simulator GUI;
+     simulator GUI;
      String address;
      int intGPR;
      int RX;
@@ -70,39 +74,38 @@ public class Logical {
             // Valid and Overflow are declared in Registers class
             R.setGPR(RX + 1, String.valueOf(Integer.parseInt(padding(value, 16),2)));
             System.out.println("Padding done");
-            switch(RX+1)
-                    {
+            switch(RX+1){
                 case 0:
                 {
                     cs.simulator.simulator.r0.setText(R.getGPR(RX+1));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + (RX+1) + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
                     break;
                 }
                  case 1:
                 {
                     cs.simulator.simulator.r1.setText(R.getGPR(RX+1));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + (RX+1) + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
                     break;
                 }
                  case 2:
                 {
                     cs.simulator.simulator.r2.setText(R.getGPR(RX+1));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + (RX+1) + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
                     break;
                 }
                  case 3:
                 {
                     cs.simulator.simulator.r3.setText(R.getGPR(RX+1));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + (RX+1) + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
                     break;
                 }
                  default:
-                     break;
-                    }
+                    break;
+            }
             R.incrementPC();
             cs.simulator.simulator.pc.setText(R.getPC());
         } else if (R.setGPR(RY, value).equals(Overflow)) {  // if Overflow, rx <- higher order bits, rx+1 <- lower order bits
@@ -117,67 +120,67 @@ public class Logical {
                 {
                     cs.simulator.simulator.r0.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 1:
                 {
                     cs.simulator.simulator.r1.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 2:
                 {
                     cs.simulator.simulator.r2.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 3:
                 {
                     cs.simulator.simulator.r3.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  default:
                      break;
-                    }
+            }
             R.setGPR(RX + 1, result);
             switch(RX+1)
                     {
                 case 0:
                 {
                     cs.simulator.simulator.r0.setText(R.getGPR(RX+1));
-                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + (RX+1) + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + (RX+1) + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
                     break;
                 }
                  case 1:
                 {
                     cs.simulator.simulator.r1.setText(R.getGPR(RX+1));
-                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + (RX+1) + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + (RX+1) + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
                     break;
                 }
                  case 2:
                 {
                     cs.simulator.simulator.r2.setText(R.getGPR(RX+1));
-                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + (RX+1) + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + (RX+1) + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
                     break;
                 }
                  case 3:
                 {
                     cs.simulator.simulator.r3.setText(R.getGPR(RX+1));
-                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + (RX+1) + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + (RX+1) + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX+1));
                     break;
                 }
                  default:
                      break;
-                    }
+            }
             // set OVERFLOW Flag (set cc[0] to 1)
             R.setCC(0, "1");
             cs.simulator.simulator.cc.setText(R.getCC(0));
@@ -189,18 +192,18 @@ public class Logical {
             System.out.println(s);
             System.out.println("hi");
             int dec=Integer.parseInt(s,2);
-        System.out.println("dec:"+dec);
-         //reg.setMAR(reg.getPC());                        //setting MAR value
-         System.out.println(R.getPC());
-         R.setMAR(R.getPC());
-           
-         cs.simulator.simulator.mar.setText(R.getMAR());                    //Displaying MAR value
+            System.out.println("dec:"+dec);
+            //reg.setMAR(reg.getPC());                        //setting MAR value
+            System.out.println(R.getPC());
+            R.setMAR(R.getPC());
+              
+            cs.simulator.simulator.mar.setText(R.getMAR());                    //Displaying MAR value
             R.setMBR(String.valueOf(dec));              //setting MBR value
             cs.simulator.simulator.mbr.setText(R.getMBR());                    //Displaying MBR value
             R.setIR(String.valueOf(dec));               //setting IR value
             cs.simulator.simulator.ir.setText(R.getIR());                      //Displaying IR value
-                  //Whenever the the next instruction is ready pc value will increment by one
-           // R.incrementPC();
+            //Whenever the the next instruction is ready pc value will increment by one
+            // R.incrementPC();
             //reg.setPC(String.valueOf(t));
             cs.simulator.simulator.pc.setText(R.getPC());
             
@@ -242,33 +245,33 @@ public class Logical {
                 {
                     cs.simulator.simulator.r0.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 1:
                 {
                     cs.simulator.simulator.r1.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 2:
                 {
                     cs.simulator.simulator.r2.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 3:
                 {
                     cs.simulator.simulator.r3.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  default:
                      break;
-                    }
+            }
             R.setGPR(RY, String.valueOf(Integer.parseInt(rem,2)));
             switch(RY)
                     {
@@ -276,53 +279,53 @@ public class Logical {
                 {
                     cs.simulator.simulator.r0.setText(R.getGPR(RY));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RY + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RY));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RY));
                     break;
                 }
                  case 1:
                 {
                     cs.simulator.simulator.r1.setText(R.getGPR(RY));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RY + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RY));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RY));
                     break;
                 }
                  case 2:
                 {
                     cs.simulator.simulator.r2.setText(R.getGPR(RY));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RY + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RY));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RY));
                     break;
                 }
                  case 3:
                 {
                     cs.simulator.simulator.r3.setText(R.getGPR(RY));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RY + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RY));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RY));
                     break;
                 }
                  default:
                      break;
-                    }
+            }
             
             R.incrementPC();
             cs.simulator.simulator.pc.setText(R.getPC());
-             s=op+Integer.toBinaryString(RX)+Integer.toBinaryString(RY);
+            s=op+Integer.toBinaryString(RX)+Integer.toBinaryString(RY);
             System.out.println(Integer.toBinaryString(RY));
             System.out.println(s);
             System.out.println("hi");
             int dec=Integer.parseInt(s,2);
-        System.out.println("dec:"+dec);
-         //reg.setMAR(reg.getPC());                        //setting MAR value
-         System.out.println(R.getPC());
-         R.setMAR(R.getPC());
-           
-         cs.simulator.simulator.mar.setText(R.getMAR());                    //Displaying MAR value
+            System.out.println("dec:"+dec);
+            //reg.setMAR(reg.getPC());                        //setting MAR value
+            System.out.println(R.getPC());
+            R.setMAR(R.getPC());
+              
+            cs.simulator.simulator.mar.setText(R.getMAR());                    //Displaying MAR value
             R.setMBR(String.valueOf(dec));              //setting MBR value
             cs.simulator.simulator.mbr.setText(R.getMBR());                    //Displaying MBR value
             R.setIR(String.valueOf(dec));               //setting IR value
             cs.simulator.simulator.ir.setText(R.getIR());                      //Displaying IR value
-                  //Whenever the the next instruction is ready pc value will increment by one
-           // R.incrementPC();
+            //Whenever the the next instruction is ready pc value will increment by one
+            // R.incrementPC();
             //reg.setPC(String.valueOf(t));
             cs.simulator.simulator.pc.setText(R.getPC());
             
@@ -355,39 +358,35 @@ public class Logical {
             R.incrementPC();
             cs.simulator.simulator.pc.setText(R.getPC());
         }
-         s=op+Integer.toBinaryString(RX)+Integer.toBinaryString(RY);
-            System.out.println(Integer.toBinaryString(RY));
-            System.out.println(s);
-           // System.out.println("hi");
-            int dec=Integer.parseInt(s,2);
+        s=op+Integer.toBinaryString(RX)+Integer.toBinaryString(RY);
+        System.out.println(Integer.toBinaryString(RY));
+        System.out.println(s);
+        // System.out.println("hi");
+        int dec=Integer.parseInt(s,2);
         System.out.println("dec:"+dec);
-         //reg.setMAR(reg.getPC());                        //setting MAR value
-         System.out.println(R.getPC());
-         R.setMAR(R.getPC());
-           
-         cs.simulator.simulator.mar.setText(R.getMAR());                    //Displaying MAR value
-            R.setMBR(String.valueOf(dec));              //setting MBR value
-            cs.simulator.simulator.mbr.setText(R.getMBR());                    //Displaying MBR value
-            R.setIR(String.valueOf(dec));               //setting IR value
-            cs.simulator.simulator.ir.setText(R.getIR());                      //Displaying IR value
-                  //Whenever the the next instruction is ready pc value will increment by one
-           // R.incrementPC();
-            //reg.setPC(String.valueOf(t));
-           // cs.simulator.simulator.pc.setText(R.getPC());
-            
+        //reg.setMAR(reg.getPC());                        //setting MAR value
+        System.out.println(R.getPC());
+        R.setMAR(R.getPC());
+          
+        cs.simulator.simulator.mar.setText(R.getMAR());                    //Displaying MAR value
+        R.setMBR(String.valueOf(dec));              //setting MBR value
+        cs.simulator.simulator.mbr.setText(R.getMBR());                    //Displaying MBR value
+        R.setIR(String.valueOf(dec));               //setting IR value
+        cs.simulator.simulator.ir.setText(R.getIR());                      //Displaying IR value
+        
 
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MAR value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMAR());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MBR value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMBR());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "IR value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getIR());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "PC value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getPC());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MAR value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMAR());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MBR value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMBR());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "IR value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getIR());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "PC value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getPC());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
        
     }
     public void AND(){// AND: Logical AND of Register and Register
@@ -400,37 +399,37 @@ public class Logical {
                 {
                     cs.simulator.simulator.r0.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 1:
                 {
                     cs.simulator.simulator.r1.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 2:
                 {
                     cs.simulator.simulator.r2.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 3:
                 {
                     cs.simulator.simulator.r3.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  default:
                      break;
-                    }
+            }
            R.incrementPC();
            cs.simulator.simulator.pc.setText(R.getPC());
         } else {                                         // else, rx <- 0
-           // R.setGPR(RX, padding("0", 16));
+            // R.setGPR(RX, padding("0", 16));
             R.setGPR(RX,"0");
             switch(RX)
                     {
@@ -438,69 +437,66 @@ public class Logical {
                 {
                     cs.simulator.simulator.r0.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 1:
                 {
                     cs.simulator.simulator.r1.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 2:
                 {
                     cs.simulator.simulator.r2.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 3:
                 {
                     cs.simulator.simulator.r3.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  default:
                      break;
-                    }
+            }
            R.incrementPC();
            cs.simulator.simulator.pc.setText(R.getPC());
         }
-         s=op+Integer.toBinaryString(RX)+Integer.toBinaryString(RY);
-            System.out.println(Integer.toBinaryString(RY));
-            System.out.println(s);
-           // System.out.println("hi");
-            int dec=Integer.parseInt(s,2);
+        s=op+Integer.toBinaryString(RX)+Integer.toBinaryString(RY);
+        System.out.println(Integer.toBinaryString(RY));
+        System.out.println(s);
+        // System.out.println("hi");
+        int dec=Integer.parseInt(s,2);
         System.out.println("dec:"+dec);
-         //reg.setMAR(reg.getPC());                        //setting MAR value
-         System.out.println(R.getPC());
-         R.setMAR(R.getPC());
-           
-         cs.simulator.simulator.mar.setText(R.getMAR());                    //Displaying MAR value
-            R.setMBR(String.valueOf(dec));              //setting MBR value
-            cs.simulator.simulator.mbr.setText(R.getMBR());                    //Displaying MBR value
-            R.setIR(String.valueOf(dec));               //setting IR value
-            cs.simulator.simulator.ir.setText(R.getIR());                      //Displaying IR value
-                  //Whenever the the next instruction is ready pc value will increment by one
-           // R.incrementPC();
-            //reg.setPC(String.valueOf(t));
-           // cs.simulator.simulator.pc.setText(R.getPC());
+        //reg.setMAR(reg.getPC());                        //setting MAR value
+        System.out.println(R.getPC());
+        R.setMAR(R.getPC());
+          
+        cs.simulator.simulator.mar.setText(R.getMAR());                    //Displaying MAR value
+        R.setMBR(String.valueOf(dec));              //setting MBR value
+        cs.simulator.simulator.mbr.setText(R.getMBR());                    //Displaying MBR value
+        R.setIR(String.valueOf(dec));               //setting IR value
+        cs.simulator.simulator.ir.setText(R.getIR());                      //Displaying IR value
+                
             
 
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MAR value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMAR());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MBR value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMBR());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "IR value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getIR());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "PC value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getPC());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MAR value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMAR());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MBR value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMBR());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "IR value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getIR());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "PC value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getPC());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
        
         
     }
@@ -514,37 +510,37 @@ public class Logical {
                 {
                     cs.simulator.simulator.r0.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 1:
                 {
                     cs.simulator.simulator.r1.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 2:
                 {
                     cs.simulator.simulator.r2.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 3:
                 {
                     cs.simulator.simulator.r3.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  default:
                      break;
-                    }
+            }
            R.incrementPC();
            cs.simulator.simulator.pc.setText(R.getPC());
         } else {                                         // else, rx <- 1
-            //R.setGPR(RX, padding("1", 16));
+           //R.setGPR(RX, padding("1", 16));
            R.setGPR(RX,"1");
            switch(RX)
                     {
@@ -552,69 +548,65 @@ public class Logical {
                 {
                     cs.simulator.simulator.r0.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 1:
                 {
                     cs.simulator.simulator.r1.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 2:
                 {
                     cs.simulator.simulator.r2.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 3:
                 {
                     cs.simulator.simulator.r3.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  default:
                      break;
-                    }
+            }
             R.incrementPC();
             cs.simulator.simulator.pc.setText(R.getPC());
         }
         s=op+Integer.toBinaryString(RX)+Integer.toBinaryString(RY);
-            System.out.println(Integer.toBinaryString(RY));
-            System.out.println(s);
-           // System.out.println("hi");
-            int dec=Integer.parseInt(s,2);
+        System.out.println(Integer.toBinaryString(RY));
+        System.out.println(s);
+        // System.out.println("hi");
+        int dec=Integer.parseInt(s,2);
         System.out.println("dec:"+dec);
-         //reg.setMAR(reg.getPC());                        //setting MAR value
-         System.out.println(R.getPC());
-         R.setMAR(R.getPC());
-           
-         cs.simulator.simulator.mar.setText(R.getMAR());                    //Displaying MAR value
-            R.setMBR(String.valueOf(dec));              //setting MBR value
-            cs.simulator.simulator.mbr.setText(R.getMBR());                    //Displaying MBR value
-            R.setIR(String.valueOf(dec));               //setting IR value
-            cs.simulator.simulator.ir.setText(R.getIR());                      //Displaying IR value
-                  //Whenever the the next instruction is ready pc value will increment by one
-           // R.incrementPC();
-            //reg.setPC(String.valueOf(t));
-           // cs.simulator.simulator.pc.setText(R.getPC());
+        //reg.setMAR(reg.getPC());                        //setting MAR value
+        System.out.println(R.getPC());
+        R.setMAR(R.getPC());
+          
+        cs.simulator.simulator.mar.setText(R.getMAR());                    //Displaying MAR value
+        R.setMBR(String.valueOf(dec));              //setting MBR value
+        cs.simulator.simulator.mbr.setText(R.getMBR());                    //Displaying MBR value
+        R.setIR(String.valueOf(dec));               //setting IR value
+        cs.simulator.simulator.ir.setText(R.getIR());                      //Displaying IR value
+                 
             
-
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MAR value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMAR());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MBR value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMBR());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "IR value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getIR());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "PC value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getPC());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MAR value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMAR());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MBR value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMBR());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "IR value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getIR());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "PC value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getPC());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
        
         
     }
@@ -628,33 +620,33 @@ public class Logical {
                 {
                     cs.simulator.simulator.r0.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 1:
                 {
                     cs.simulator.simulator.r1.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 2:
                 {
                     cs.simulator.simulator.r2.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 3:
                 {
                     cs.simulator.simulator.r3.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  default:
                      break;
-                    }
+            }
            R.incrementPC();
            cs.simulator.simulator.pc.setText(R.getPC());
         } else {                                         // else, rx <- 0
@@ -666,69 +658,64 @@ public class Logical {
                 {
                     cs.simulator.simulator.r0.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 1:
                 {
                     cs.simulator.simulator.r1.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 2:
                 {
                     cs.simulator.simulator.r2.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  case 3:
                 {
                     cs.simulator.simulator.r3.setText(R.getGPR(RX));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + RX + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(RX));
                     break;
                 }
                  default:
                      break;
-                    }
+            }
             R.incrementPC();
             cs.simulator.simulator.pc.setText(R.getPC());
         }
         s=op+Integer.toBinaryString(RX);
-          //  System.out.println(Integer.toBinaryString(RY));
-            System.out.println(s);
-           // System.out.println("hi");
-            int dec=Integer.parseInt(s,2);
+        System.out.println(s);
+        int dec=Integer.parseInt(s,2);
         System.out.println("dec:"+dec);
-         //reg.setMAR(reg.getPC());                        //setting MAR value
-         System.out.println(R.getPC());
-         R.setMAR(R.getPC());
-           
-         cs.simulator.simulator.mar.setText(R.getMAR());                    //Displaying MAR value
-            R.setMBR(String.valueOf(dec));              //setting MBR value
-            cs.simulator.simulator.mbr.setText(R.getMBR());                    //Displaying MBR value
-            R.setIR(String.valueOf(dec));               //setting IR value
-            cs.simulator.simulator.ir.setText(R.getIR());                      //Displaying IR value
-                  //Whenever the the next instruction is ready pc value will increment by one
-           // R.incrementPC();
-            //reg.setPC(String.valueOf(t));
-           // cs.simulator.simulator.pc.setText(R.getPC());
+        //reg.setMAR(reg.getPC());                        //setting MAR value
+        System.out.println(R.getPC());
+        R.setMAR(R.getPC());
+          
+        cs.simulator.simulator.mar.setText(R.getMAR());                    //Displaying MAR value
+        R.setMBR(String.valueOf(dec));              //setting MBR value
+        cs.simulator.simulator.mbr.setText(R.getMBR());                    //Displaying MBR value
+        R.setIR(String.valueOf(dec));               //setting IR value
+        cs.simulator.simulator.ir.setText(R.getIR());                      //Displaying IR value
+              
             
 
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MAR value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMAR());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MBR value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMBR());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "IR value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getIR());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "PC value:");
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getPC());
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MAR value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMAR());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "MBR value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getMBR());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "IR value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getIR());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "PC value:");
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getPC());
+        cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "\n");
        
         
     }

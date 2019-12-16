@@ -5,6 +5,10 @@ import Registers.Registers;
 import Utilities.EffectiveAddress;
 import cs.simulator.simulator;
 
+/**
+ * @author Ya
+ */
+
 /* Transfer Instructions change control of program execution
  * The same format as Load/Store instructions: opcode (0-5) + reg (6-7) + ireg (8-9) + i (10) + address (11-15)
  */
@@ -288,7 +292,7 @@ public class Transfer {
         R.setGPR(3, R.incrementPC());                    // R3 <- PC + 1
         cs.simulator.simulator.r3.setText(R.getGPR(3));
         R.setPC(address);                                     // PC <- EA
-// R0 should contain pointer to arguments
+        // R0 should contain pointer to arguments
         cs.simulator.simulator.pc.setText(R.getPC());
         int j = Integer.parseInt(address);
 

@@ -7,6 +7,10 @@ import cs.simulator.simulator;
 
 import java.util.Arrays;
 
+/**
+ * @author Zixiang
+ */
+
 public class ShiftRotate {
      Memory mem;
      Registers R;
@@ -78,28 +82,28 @@ public class ShiftRotate {
                 {
                     cs.simulator.simulator.r0.setText(String.valueOf(Integer.parseInt(R.getGPR(intGPR),2)));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + intGPR + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(intGPR));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(intGPR));
                     break;
                 }
                  case 1:
                 {
                     cs.simulator.simulator.r1.setText(String.valueOf(Integer.parseInt(R.getGPR(intGPR),2)));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + intGPR + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(intGPR));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(intGPR));
                     break;
                 }
                  case 2:
                 {
                     cs.simulator.simulator.r2.setText(String.valueOf(Integer.parseInt(R.getGPR(intGPR),2)));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + intGPR + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(intGPR));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(intGPR));
                     break;
                 }
                  case 3:
                 {
                     cs.simulator.simulator.r3.setText(String.valueOf(Integer.parseInt(R.getGPR(intGPR),2)));
                     cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "Register value(R" + intGPR + ")" + ":");     //Log is used to display the description of what is happening to the values of MAR,MBR,IR,PC whenever we execute a instruction
-            cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(intGPR));
+                    cs.simulator.simulator.log.setText(cs.simulator.simulator.log.getText() + "" + R.getGPR(intGPR));
                     break;
                 }
                  default:

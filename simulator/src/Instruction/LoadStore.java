@@ -5,6 +5,9 @@ import Registers.Registers;
 import Utilities.DataTypeConvert;
 import cs.simulator.simulator.*;
 
+/**
+ * @author Ya
+ */
 
 public class LoadStore {
     Memory mem;
@@ -326,45 +329,30 @@ public class LoadStore {
             default:
                 break;
         }
-      int j = Integer.parseInt(address);
+        int j = Integer.parseInt(address);
         System.out.println("j:"+j);
         q = Integer.toBinaryString(j);
         System.out.println("q:"+q);
         int j1;
-      //  System.out.println("j1:"+j1);
+        //  System.out.println("j1:"+j1);
         int count=0;
-        //  System.out.println(j1);
-     /*   while (j1 > 0) {
-            j1 = j1 / 10;
-            count = count + 1;
-        }
-        if (count < 5 && j<63) {
-            int count1 = 5 - count;
-            // System.out.println(count);
-            while (count1 != 0) {
-                q = 0 + q;
-                count1--;
-                //  System.out.println("hi");
-            }
-        }*/
-   //  q = String.format("%06d", q);
-    // System.out.println(q);
-     j1=(int)(Math.log(j) /Math.log(2) + 1);
-     System.out.println("j1:"+j1);
-    
-     if(j1<=6)
-     {
-         count=6-j1;
-         while(count!=0)
-         {
-             q=0+q;
-             count--;
-         }
-     }
-     else
-     {
         
-     }
+        j1=(int)(Math.log(j) /Math.log(2) + 1);
+        System.out.println("j1:"+j1);
+       
+        if(j1<=6)
+        {
+            count=6-j1;
+            while(count!=0)
+            {
+                q=0+q;
+                count--;
+            }
+        }
+        else
+        {
+           
+        }
     
 
         s = op + String.valueOf(Integer.toBinaryString(Integer.parseInt(GPR))) + String.valueOf(Integer.toBinaryString(Integer.parseInt(IX))) + I + String.valueOf(q);
