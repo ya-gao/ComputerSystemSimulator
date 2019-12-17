@@ -54,4 +54,4 @@ For more information, please refer to [DesignNotes.md](DesignNotes.md) and [Proj
 
 [@dilipvarma3](https://github.com/dilipvarma3)
 
-[zwang61](https://github.com/zwang61)
+[@zwang61](https://github.com/zwang61)
